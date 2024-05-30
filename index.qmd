@@ -1,11 +1,712 @@
 ---
-title: "brm-intro-to-r"
+title: Introduction to R & RStudio
+subtitle: Brunei R User Group Meetup 🇧🇳
+date: 1 June 2024
+author:
+  - name: Hafeezul Raziq
+execute:
+  freeze: auto
 ---
 
-This is a Quarto website.
+### `https://bruneir.github.io/brm-intro-to-r` {.unlisted}
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+## Preliminaries
+
+Welcome to the 3rd Brunei R User Group meetup!
+
+::: {layout="[ 65, 35 ]"}
+::: {#first-column}
+<br>
+
+> The RUGS mission is to facilitate the person-to-person exchange of knowledge in small group settings on a global scale. ---R Consortium
+:::
+
+::: {#second-column}
+![](https://bruneir.github.io/bruneiR-Rlogo.jpg)
+
+``` r
+"R" |> 
+  rug("b", _, "unei")
+```
+:::
+:::
+
+<u>About us</u>
+
+-   A group of UBD-ians and R enthusiasts
+-   We want to create a community of R users in Brunei
+-   Champion the Open Source cause
+
+<u>Past events</u>
+
+-   Analyzing Spatial Data using R \[Workshop\]
+-   R\>aya Meetup Sharing Sessions
+
+## Expectations
+
+::: {.callout-warning title="Today's Plan"}
+This is a hands-on, live-coding, lecture-style "workshop". Expect to learn (or at the very least, see me do!)...
+
+1.  What is R & RStudio? How can it ease the burden of repeated reporting?
+2.  Basic functions for manipulating data
+3.  Using R effectively
+4.  More data manipulation
+5.  Visualizing data
+6.  A peek at advanced topics
+:::
+
+## Introduction to R & RStudio
+
+When people consider switching to R, they usually think about it as a direct replacement for whatever tool they're currently using. While R can indeed replace software like Excel, SPSS, or Stata, it offers much more!
+
+Suppose a current workflow that looks like this,
+
+1.  Data analysis in SPSS (or a similar tool)
+2.  Data visualization in Excel
+3.  Report writing in Word
+
+Have you ever encountered an error in the first step and had to go back through all three steps to fix it? It's quite frustrating, isn't it?
+
+R can get around this by combining data analysis, visualization, and reporting in one tool using RMarkdown. Any time you realize you've made a mistake, you just rerun your code and you get a new report. Think of the time it can save you!
+
+Hence, R is a popular programming language, especially in certain fields such as data science, academic research, and statistics.
+
+RStudio is an integrated development editor (IDE) for R. It is easier to write code using the editor.
+
+Here are several reasons why you should use R:
+
+1.  R is widely used among statisticians, especially academic statisticians.
+    -   If there is a new statistical procedure developed somewhere in academia, chances are that the code for it will be made available in R. This distinguishes R from, say, Python.
+2.  R is commonly used for statistical analyses in many disciplines.
+    -   Other software, such as SPSS or SAS is also used and in some disciplines would be the primary choice for some discipline specific courses, but R is popular and its user base is growing.
+3.  R is free.
+    -   You can install it and all optional packages on your computer at no cost. This is a big difference between R and SAS, SPSS, MATLAB, and most other statistical software.
+4.  R is has a vibrant and growing community.
+    -   With the advent of the tidyverse and RStudio, R is a vibrant and growing community. We also have found the community to be extremely welcoming. The R ecosystem is one of its strengths.
+
+In this workshop, we will dive into the fundamentals of R and RStudio.
+
+## Getting Started with R & RStudio
+
+::: {.callout-tip title="What we'll learn"}
+-   Installing the R Language.
+-   Installing the RStudio.
+-   Exploring the RStudio Interface
+-   Packages & help() function
+:::
+
+Follow the guidelines in [Brunei R website](https://bruneir.github.io/) - Under blog, "How to Install R and Rstudio"
+
+Once installed, launch RStudio and this is probably what you'll see.
+
+![](images/rs-no-project.png){fig-align="center"}
+
+Notice the default panes:
+
+-   Console (entire left)
+-   Environment/History (tabbed in upper right)
+-   Files/Plots/Packages/Help (tabbed in lower right)
+
+![](images/rs-four-panels.png){fig-align="center"}
+
+### Packages
+
+Everything which is done in R is done by functions. Commonly used functions are grouped in packages. Installing different packages expand the functionality of R.
+
+Packages are bundles of code that add new functions to R.
+
+-   Base packages are installed with R but not loaded by default.
+
+-   Contributed packages need to be downloaded, installed & loaded separately.
+
+To install a package, say tidyverse, for the first time, type
+
+```{r, eval=FALSE}
+install.packages("tidyverse")
+```
+
+To load the package, type the package name without quotation
+
+```{r, eval=FALSE}
+library(tidyverse)
+```
+
+### Getting help
+
+To access R's built-in help facility to get information on any function simply use the help() function. For example, to open the help page for our friend the mean() function.
 
 ```{r}
-1 + 1
+help("mean")
 ```
+
+or you can use the equivalent shortcut.
+
+```{r}
+?mean
+```
+
+After you run the code, the help page is displayed in the 'Help' tab in the Files pane (bottom right of RStudio).
+
+![](images/rs-help.png){fig-align="center"} or you can always google it!
+
+## Basics of R Programming
+
+::: {.callout-tip title="What we'll learn"}
+-   Data types in R
+-   Variables and assignment
+-   Basic arithmetic operations
+-   Working with vectors and basic vector operations
+:::
+
+Important basics:
+
+-   R is case sensitive i.e. `A` is not the same as `a` and `anova` is not the same as `Anova`.
+
+-   Anything that follows a \# symbol is interpreted as a comment and ignored by R. Comments should be used liberally throughout your code for both your own information and also to help your collaborators
+
+-   In general, R is fairly tolerant of extra spaces inserted into your code, in fact using spaces is actively encouraged. However, spaces should not be inserted into operators i.e. \<- should not read \< - (note the space).
+
+### Data types
+
+1.  [**Logical**]{.underline}
+    -   Logical data take on the value of either TRUE or FALSE. There's also another special type of logical called NA to represent missing values.
+
+```{r}
+x <- TRUE
+x
+
+y <- FALSE
+y
+
+z <- NA
+z
+```
+
+2.  [**Numeric**]{.underline}
+    -   Numeric data are real numbers that contain a decimal. The default numerical type are known as "double", which are floating point values.
+
+```{r}
+x <- 2.6
+x
+class(x)
+typeof(x)
+```
+
+3.  [**Integers**]{.underline}
+    -   Integers are whole numbers (those numbers without a decimal point). It is represented by number and letter L: 1L, 2L, 3L.
+
+```{r}
+x <- 1L
+x
+class(x)
+```
+
+4.  [**Character**]{.underline}
+    -   Character data are used to represent string values. You can think of character strings as something like a word (or multiple words).
+
+```{r}
+    x <- "Hello, World"
+    class(x)
+    
+    is.character(x)
+```
+
+A special type of character string is a Factor, which is a string but with additional attributes (like levels or an order). For example, Low, Medium and High which are denoted as factors where the computer record them as by 1, 2 and 3 respectively.
+
+```{r}
+perf <- c("Low", "Medium", "High")
+factor(perf)
+```
+
+Here's a summary table of some of the logical test and coercion functions available to you.
+
+| **Type**  | **Logical test** | **Coercing**   |
+|-----------|------------------|----------------|
+| Logical   | `is.logical`     | `as.logical`   |
+| Double    | `is.numeric`     | `as.numeric`   |
+| Integer   | `is.integer`     | `as.integer`   |
+| Character | `is.character`   | `as.character` |
+| Factor    | `is.factor`      | `as.factor`    |
+| Complex   | `is.complex`     | `as.complex`   |
+
+### Variables and Assignment
+
+Variables in R are used to store data values. You can create a variable using the assignment operator \<- or =.
+
+```{r}
+first_name <- "Hafeezul"
+height <- 175.5
+
+first_name
+height
+```
+
+```{r}
+last_name = "Raziq"
+
+last_name
+```
+
+::: callout-note
+Best practice: Use \<- for assignment to avoid confusion with the equality operator ==.
+:::
+
+### Basic Arithmetic Operations
+
+R supports basic arithmetic operations, which are similar to those in other programming languages.
+
+1.  [**Addition**]{.underline}
+
+```{r}
+5 + 2
+```
+
+2.  [**Subtraction**]{.underline}
+
+```{r}
+10 - 2
+```
+
+3.  [**Multiplication/Product**]{.underline}
+
+```{r}
+7 * 5
+```
+
+4.  [**Division/Quotient**]{.underline}
+
+```{r}
+20 / 4
+```
+
+5.  [**Exponential**]{.underline}
+
+```{r}
+10 ^ 2
+```
+
+6.  [**Modulus**]{.underline}
+
+-   Returns the remainder of the division.
+
+```{r}
+10 %% 2
+```
+
+### Basic Vector Operations
+
+Vectors can be combined using the concatenate c() function.
+
+```{r}
+numbers <- c(1,2,3)
+numbers
+```
+
+```{r}
+rbaf <- c("Land Force", "Navy", "Air Force")
+rbaf
+```
+
+```{r}
+numbers <- c(1:10, 15:20)
+numbers
+```
+
+[**`length()`**]{.underline}: Returns the number of elements in a vector.
+
+```{r}
+length(rbaf)
+length(numbers)
+```
+
+[**`sum()`**]{.underline}: Returns the sum of all elements in a numeric vector.
+
+```{r}
+sum(numbers)
+```
+
+[**`mean()`**]{.underline}: Returns the average of the elements in a numeric vector.
+
+```{r}
+mean(numbers)
+```
+
+Use [**`square brackets []`**]{.underline} to access elements by their index (starting from 1).
+
+```{r}
+rbaf[2]
+```
+
+```{r}
+rbaf[-2]
+```
+
+```{r}
+rbaf[1:2]
+```
+
+```{r}
+numbers[11]
+```
+
+## 10-MINUTE BREAK
+
+## Data structures in R
+
+::: {.callout-tip title="What we'll learn"}
+-   Introduction to matrices, arrays, data frames and list.
+-   Creating and manipulating data frames.
+-   Accessing elements in data structures.
+:::
+
+R offers various data structures for storing and manipulating data. The most commonly used ones are vector, matrices, arrays, data frames and list.
+
+1.  [**Matrix**]{.underline}
+    -   Matrix is a two-dimensional array. Alternatively, it is stacking multiple vectors of the same length.
+
+To define a matrix from a vector, the syntax is `matrix(vector, nrow, ncol, byrow)`. `byrow` is the way we fill the array. It is either `TRUE` or `FALSE`.
+
+Size of matrix is rather complicated since it has two dimensions. There are three basics operations:
+
+-   **`length()`**: total number of elements
+
+-   **`ncol()`**: total number of columns
+
+-   **`nrow()`**: total number of rows
+
+```{r}
+z <- matrix(1:6, ncol = 2, byrow = TRUE)
+z
+length(z)
+```
+
+```{r}
+ncol(z) # check number of columns
+```
+
+```{r}
+nrow(z) # check number of rows
+```
+
+The following code fills the matrix by column.
+
+```{r}
+x <- matrix(1:20, nrow=5, ncol=4, byrow=FALSE)
+x
+```
+
+Extracting elements from matrix is similar to extraction in vector.
+
+```{r}
+x[2,] #the second row
+```
+
+```{r}
+x[,1] #the first column
+```
+
+```{r}
+x[1,2] #first row, second column
+```
+
+```{r}
+mat <- matrix(c(85, 90, 88, 75, 80, 78, 95, 85, 89), nrow = 3, ncol = 3, byrow = TRUE)
+colnames(mat) <- c("Physical", "Shooting", "Strategy")
+rownames(mat) <- c("Hasbul", "Khalid", "Fitri")
+
+mat
+```
+
+2.  [**Array**]{.underline}
+
+Array behaves like matrix but it is multi-dimensional (more than 2). To define array from vector, the syntax is `array(vector/input, c(nrow, ncol, nmatrix))`
+
+```{r}
+x<- array(1:12, c(2,3,2))
+x
+```
+
+3.  [**Data frame**]{.underline}
+    -   Data frame is most useful form of data type in R. It behaves like matrix but can contain vectors of different types. That is we can have vectors of characters and numeric together, which is not feasible under matrix or array.
+
+        To visualize a data frame, one may consider a spreadsheet: Each column is a vector and each spreadsheet is a data frame -- it is a collection of columns of cells.
+
+```{r}
+# RBAF Personnel Data
+rbaf_df <- data.frame(
+  name = c("Hasbul", "Khalid", "Fitri"),
+  rank = c("Lieutenant", "Sergeant", "Captain"),
+  age = c(25, 30, 35)
+)
+rbaf_df
+```
+
+\`\`\`
+
+Let's add a column for years of service:
+
+```{r}
+rbaf_df$service <- c(2, 10, 5) # adding a new column for years of service
+rbaf_df
+```
+
+The `$` operator is used to extract or subset a specific part of a data object in R.
+
+```{r}
+rbaf_df$name
+```
+
+Removing the 'Rank' column:
+
+```{r}
+rbaf_df$rank <- NULL
+rbaf_df
+```
+
+Use `rbind()` to add rows, such as:
+
+```{r}
+new_row <- data.frame(name = "Hafeezul", age = 28, service = 1)
+rbaf_df <- rbind(rbaf_df, new_row)
+
+rbaf_df
+```
+
+Remove rows by sub-setting:
+
+```{r}
+rbaf_df <- rbaf_df[-2, ]  # Removes the second row
+```
+
+## Operators, Functions and Control Structures
+
+::: {.callout-tip title="What we'll learn"}
+-   Introduction to logical and comparison operators
+-   Introduction to functions
+-   Introduction to control structures (if-else statements, loops).
+-   Example applications of control structures and loops.
+:::
+
+### Logical Operators
+
+| Operator   | Operation    | Vectorized? |
+|------------|--------------|-------------|
+| `x|y`      | or           | Yes         |
+| `x & y`    | and          | Yes         |
+| `!x`       | not          | Yes         |
+| `x || y`   | or           | No          |
+| `x && y`   | and          | No          |
+| `xor(x,y)` | exclusive or | Yes         |
+
+### Comparison Operators
+
+| Operator   | Comparison                | Vectorized? |
+|------------|---------------------------|-------------|
+| `x<y`      | less than                 | Yes         |
+| `x>y`      | greater than              | Yes         |
+| `x <= y`   | less than or equals to    | Yes         |
+| `x >= y`   | greater than or equals to | Yes         |
+| `x != y`   | not equals to             | Yes         |
+| `x == y`   | equals to                 | Yes         |
+| `x %in% y` | contains                  | Yes         |
+
+### Functions
+
+Functions are defined by two components: the arguments (formals) and the code (body).
+
+You can create your own functions using the function keyword.
+
+```{r}
+square <- function(x) {
+  return(x^2)
+}
+
+square(4)
+```
+
+### Control structures
+
+Control structures are used to manage the flow of execution in R scripts.
+
+1.  `if-else` Statements
+
+-   Conditional execution based on a logical test
+
+Here is a common example for `if-else` statement.
+
+```{r}
+x <- 3
+
+if(x < 0){
+  "x is negative"
+} else if (x > 0) {
+  "x is positive"
+} else {
+  "x is zero"
+}
+```
+
+Another example, determining if a soldier is eligible for a promotion based on years of service.
+
+```{r}
+service <- 6
+
+if (service > 5) {
+  "Eligible"
+} else {
+  "Not Eligible"
+}
+```
+
+2.  `for` Loops
+
+Simplest, and most common type of loop in R--given a vector iterate through the elements and evaluate the code block for each.
+
+```{r}
+is_even <- function(x) { 
+  res <- c()
+  
+for(val in x) {
+res <- c(res, val %% 2 == 0)
+}
+  
+res
+}
+is_even(1:10)
+```
+
+```{r}
+is_even(seq(1, 5, 2))
+```
+
+3.  `while` loops
+
+Repeat until the given condition is not met (i.e. evaluates to `FALSE`)
+
+```{r}
+make_seq <- function(from = 1, to = 1, by = 1) {
+  res <- c(from)
+  cur <- from
+  
+  while(cur + by <= to) {
+    cur = cur + by
+    res = c(res, cur)
+  }
+  
+  res
+}
+
+make_seq(1, 6)
+```
+
+```{r}
+make_seq(1, 6, 2)
+```
+
+[**Exercise**]{.underline}:
+
+Write a set of conditional(s) that satisfies the following requirements,
+
+-   If `x` is greater than `3` and `y` is less than or equal to `3` then print "Hello world!"
+-   Otherwise if `x` is greater than `3` print "!dlrow olleH"
+-   If is `x` is less than or equal to `3` then print "Something else..."
+-   Stop execution if `x` is odd and `y` is even and report an error, don't print any of the text strings above.
+
+Test out your code by trying various values of `x` and `y`.
+
+## 10-MINUTE BREAK
+
+## Data Import and Export
+
+::: {.callout-tip title="What we'll learn"}
+-   Importing data from various file formats (CSV, Excel, etc.) into R.
+-   Exporting data from R to different file formats
+:::
+
+R provides various functions for importing data from different file formats, making it easy to work with external data sources.
+
+### Importing CSV files
+
+The read.csv() function is used to read CSV files.
+
+```{r}
+titanic <- read.csv("~/Documents/github_local/brm-intro-to-r/data/titanic.csv")
+```
+
+### Importing Excel files
+
+The readxl package provides functions to read Excel files. Install the package (if not already installed) and load it.
+
+```{r, eval=FALSE}
+install.packages("readxl")
+library(readxl)
+
+titanic <- read_excel("~/Documents/github_local/brm-intro-to-r/data/titanic.xlsx")
+```
+
+```{r}
+head(titanic)  # Display the first few rows of the data
+
+```
+
+
+## Data Visualization
+
+::: {.callout-tip title="What we'll learn"}
+-   Creating basic plots (scatter plots, bar plots, histograms, etc.).
+:::
+
+R provides powerful tools for data visualization, allowing you to create various types of plots to explore and present your data. Using the Titanic data set, we can create several common types of plots.
+
+1.    Scatter Plots:
+
+Scatter plots are useful for visualizing the relationship between two variables. Lets plot the relationship between age and fare in the Titanic data set.
+
+```{r}
+plot(titanic$Age, titanic$Fare, 
+     main="Age vs. Fare",
+     xlab="Age", ylab="Fare", pch=19)
+```
+
+2.    Bar Plots
+
+Bar plots are useful for comparing. We will visualize the count of passengers in each class.
+
+```{r}
+barplot(table(
+  titanic$Pclass), 
+        main="Count of Passengers by Class", 
+        xlab="Passenger Class", ylab="Count", col="blue")
+```
+
+3.    Histograms
+
+Histograms are useful for visualizing the distribution of a single numeric variable. Lets plot the the distribution of ages in the Titanic data set.
+
+```{r}
+hist(titanic$Age, 
+     main="Distribution of Ages on the Titanic", 
+     xlab="Age", col="green", breaks=10)
+
+```
+
+
+4    Box Plots
+-   Box plots are useful for visualizing the distribution and identifying outliers. Lets visualize the distribution of fares by passenger class.
+
+```{r}
+boxplot(Fare ~ Pclass, data=titanic , 
+        main="Fares by Passenger Class", 
+        xlab="Passenger Class", ylab="Fare", col="orange")
+```
+
+
+## References
+
+R for the Rest of Us: https://book.rfortherestofus.com/
+
+Techincal Analysis with R (second edition): https://bookdown.org/kochiuyu/technical-analysis-with-r-second-edition2/
+
+Probability, Statistics, and Data: A fresh approach using R: https://mathstat.slu.edu/\~speegle/\_book/
+
+An Introduction to R: https://intro2r.com/
