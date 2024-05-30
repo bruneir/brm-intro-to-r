@@ -2,6 +2,12 @@
 title: "About"
 ---
 
+```{r,eval=FALSE}
+library(rmarkdown)
+library(knitr)
+
+```
+
 About this site
 
 ```{r}
