@@ -8,6 +8,11 @@ execute:
   freeze: auto
 ---
 
+```{r,eval=FALSE,echo=FALSE}
+library(rmarkdown)
+library(knitr)
+```
+
 ### `https://bruneir.github.io/brm-intro-to-r` {.unlisted}
 
 ## Preliminaries
@@ -649,7 +654,6 @@ head(titanic)  # Display the first few rows of the data
 
 ```
 
-
 ## Data Visualization
 
 ::: {.callout-tip title="What we'll learn"}
@@ -658,7 +662,7 @@ head(titanic)  # Display the first few rows of the data
 
 R provides powerful tools for data visualization, allowing you to create various types of plots to explore and present your data. Using the Titanic data set, we can create several common types of plots.
 
-1.    Scatter Plots:
+1.  Scatter Plots:
 
 Scatter plots are useful for visualizing the relationship between two variables. Lets plot the relationship between age and fare in the Titanic data set.
 
@@ -668,7 +672,7 @@ plot(titanic$Age, titanic$Fare,
      xlab="Age", ylab="Fare", pch=19)
 ```
 
-2.    Bar Plots
+2.  Bar Plots
 
 Bar plots are useful for comparing. We will visualize the count of passengers in each class.
 
@@ -679,7 +683,7 @@ barplot(table(
         xlab="Passenger Class", ylab="Count", col="blue")
 ```
 
-3.    Histograms
+3.  Histograms
 
 Histograms are useful for visualizing the distribution of a single numeric variable. Lets plot the the distribution of ages in the Titanic data set.
 
@@ -690,16 +694,13 @@ hist(titanic$Age,
 
 ```
 
-
-4    Box Plots
--   Box plots are useful for visualizing the distribution and identifying outliers. Lets visualize the distribution of fares by passenger class.
+4 Box Plots - Box plots are useful for visualizing the distribution and identifying outliers. Lets visualize the distribution of fares by passenger class.
 
 ```{r}
 boxplot(Fare ~ Pclass, data=titanic , 
         main="Fares by Passenger Class", 
         xlab="Passenger Class", ylab="Fare", col="orange")
 ```
-
 
 ## References
 
