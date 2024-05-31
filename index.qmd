@@ -60,7 +60,7 @@ This is a hands-on, live-coding, lecture-style "workshop". Expect to learn (or a
 6.  A peek at advanced topics
 :::
 
-## Introduction to R & RStudio
+## 1. Introduction to R & RStudio
 
 When people consider switching to R, they usually think about it as a direct replacement for whatever tool they're currently using. While R can indeed replace software like Excel, SPSS, or Stata, it offers much more!
 
@@ -91,7 +91,7 @@ Here are several reasons why you should use R:
 
 In this workshop, we will dive into the fundamentals of R and RStudio.
 
-## Getting Started with R & RStudio
+## 2. Getting Started with R & RStudio
 
 ::: {.callout-tip title="What we'll learn"}
 -   Installing the R Language.
@@ -136,6 +136,19 @@ To load the package, type the package name without quotation
 library(tidyverse)
 ```
 
+Recommended Packages
+
+For data manipulation:
+- tidyverse - An opinionated collection of R packages designed for data science that share an underlying design philosophy, grammar, and data structures. This collection includes all the packages in this section, plus many more for data import, tidying, and visualization listed here.
+
+For data visualization:
+- ggplot2 - R's famous package for making beautiful graphics. ggplot2 lets you use the grammar of graphics to build layered, customizable plots.
+
+For reproducible reporting:
+R Markdown - The perfect workflow for reproducible reporting. Write R code in your markdown reports. When you run render, R Markdown will replace the code with its results and then export your report as an HTML, pdf, or MS Word document, or a HTML or pdf slideshow. The result? Automated reporting. R Markdown is integrated straight into RStudio.
+
+and many more...
+
 ### Getting help
 
 To access R's built-in help facility to get information on any function simply use the help() function. For example, to open the help page for our friend the mean() function.
@@ -152,9 +165,17 @@ or you can use the equivalent shortcut.
 
 After you run the code, the help page is displayed in the 'Help' tab in the Files pane (bottom right of RStudio).
 
-![](images/rs-help.png){fig-align="center"} or you can always google it!
+![](images/rs-help.png){fig-align="center"} 
 
-## Basics of R Programming
+To find what package a function belongs to, use the ?? operator.
+
+```{r}
+??survfit
+```
+
+or you can always google it!
+
+## 3. Basics of R Programming
 
 ::: {.callout-tip title="What we'll learn"}
 -   Data types in R
@@ -172,6 +193,7 @@ Important basics:
 -   In general, R is fairly tolerant of extra spaces inserted into your code, in fact using spaces is actively encouraged. However, spaces should not be inserted into operators i.e. \<- should not read \< - (note the space).
 
 ### Data types
+
 
 1.  [**Logical**]{.underline}
     -   Logical data take on the value of either TRUE or FALSE. There's also another special type of logical called NA to represent missing values.
@@ -356,7 +378,7 @@ numbers[11]
 
 ## 10-MINUTE BREAK
 
-## Data structures in R
+## 4. Data structures in R
 
 ::: {.callout-tip title="What we'll learn"}
 -   Introduction to matrices, arrays, data frames and list.
@@ -483,7 +505,7 @@ Remove rows by sub-setting:
 rbaf_df <- rbaf_df[-2, ]  # Removes the second row
 ```
 
-## Operators, Functions and Control Structures
+## 5. Operators, Functions and Control Structures
 
 ::: {.callout-tip title="What we'll learn"}
 -   Introduction to logical and comparison operators
@@ -621,7 +643,7 @@ Test out your code by trying various values of `x` and `y`.
 
 ## 10-MINUTE BREAK
 
-## Data Import and Export
+## 6. Data Import and Export
 
 ::: {.callout-tip title="What we'll learn"}
 -   Importing data from various file formats (CSV, Excel, etc.) into R.
@@ -654,7 +676,7 @@ head(titanic)  # Display the first few rows of the data
 
 ```
 
-## Data Visualization
+## 7. Data Visualization
 
 ::: {.callout-tip title="What we'll learn"}
 -   Creating basic plots (scatter plots, bar plots, histograms, etc.).
@@ -694,7 +716,7 @@ hist(titanic$Age,
 
 ```
 
-4 Box Plots - Box plots are useful for visualizing the distribution and identifying outliers. Lets visualize the distribution of fares by passenger class.
+4.  Box Plots - Box plots are useful for visualizing the distribution and identifying outliers. Lets visualize the distribution of fares by passenger class.
 
 ```{r}
 boxplot(Fare ~ Pclass, data=titanic , 

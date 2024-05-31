@@ -2,14 +2,4 @@
 title: "About"
 ---
 
-```{r,eval=FALSE}
-library(rmarkdown)
-library(knitr)
-
-```
-
-About this site
-
-```{r}
-1 + 1
-```
+This is the workshop content on "Introduction to R & RStudio" delivered by Hafeezul Raziq on Saturday, 1st June 2024. Organized by Brunei R User Group.
