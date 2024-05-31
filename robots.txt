@@ -1,0 +1,1 @@
+Sitemap: https://bruneir.github.io/brm-intro-to-r/sitemap.xml
