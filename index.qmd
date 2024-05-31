@@ -139,13 +139,16 @@ library(tidyverse)
 Recommended Packages
 
 For data manipulation:
-- tidyverse - An opinionated collection of R packages designed for data science that share an underlying design philosophy, grammar, and data structures. This collection includes all the packages in this section, plus many more for data import, tidying, and visualization listed here.
+
+-   `tidyverse` - An opinionated collection of R packages designed for data science that share an underlying design philosophy, grammar, and data structures. This collection includes all the packages in this section, plus many more for data import, tidying, and visualization listed here.
 
 For data visualization:
-- ggplot2 - R's famous package for making beautiful graphics. ggplot2 lets you use the grammar of graphics to build layered, customizable plots.
+
+-   `ggplot2` - R's famous package for making beautiful graphics. `ggplot2` lets you use the grammar of graphics to build layered, customizable plots.
 
 For reproducible reporting:
-R Markdown - The perfect workflow for reproducible reporting. Write R code in your markdown reports. When you run render, R Markdown will replace the code with its results and then export your report as an HTML, pdf, or MS Word document, or a HTML or pdf slideshow. The result? Automated reporting. R Markdown is integrated straight into RStudio.
+
+-   `R Markdown` - The perfect workflow for reproducible reporting. Write R code in your markdown reports. When you run render, R Markdown will replace the code with its results and then export your report as an HTML, pdf, or MS Word document, or a HTML or pdf slideshow. The result? Automated reporting. R Markdown is integrated straight into RStudio.
 
 and many more...
 
@@ -153,23 +156,23 @@ and many more...
 
 To access R's built-in help facility to get information on any function simply use the help() function. For example, to open the help page for our friend the mean() function.
 
-```{r}
+```{r, eval=FALSE}
 help("mean")
 ```
 
 or you can use the equivalent shortcut.
 
-```{r}
+```{r, eval=FALSE}
 ?mean
 ```
 
 After you run the code, the help page is displayed in the 'Help' tab in the Files pane (bottom right of RStudio).
 
-![](images/rs-help.png){fig-align="center"} 
+![](images/rs-help.png){fig-align="center"}
 
 To find what package a function belongs to, use the ?? operator.
 
-```{r}
+```{r, eval=FALSE}
 ??survfit
 ```
 
@@ -194,6 +197,7 @@ Important basics:
 
 ### Data types
 
+There are 6 basic types of data in R; numeric, integer, logical, character, complex and raw. However, in this workshop we will not be covering complex and raw as it is usually not widely used.
 
 1.  [**Logical**]{.underline}
     -   Logical data take on the value of either TRUE or FALSE. There's also another special type of logical called NA to represent missing values.
@@ -208,6 +212,32 @@ y
 z <- NA
 z
 ```
+
+[**Logical Operators**]{.underline}
+
+Logical operators are used to combine conditional statements:
+
+| Operator | Operation | Vectorized? |                                                                                   |
+|------------|--------------|------------|-----------------------------------|
+| `x|y`    | or        | Yes         | Element-wise Logical OR operator. It returns TRUE if one of the statement is TRUE |
+| `x & y`  | and       | Yes         | Element-wise Logical AND operator. It returns TRUE if both elements are TRUE      |
+| `!x`     | not       | Yes         | Logical NOT - returns FALSE if statement is TRUE                                  |
+| `x || y` | or        | No          | Logical OR operator. It returns TRUE if one of the statement is TRUE.             |
+| `x && y` | and       | No          | Logical AND operator - Returns TRUE if both statements are TRUE                   |
+
+[**Comparison Operators**]{.underline}
+
+Comparison operators are used to compare two values:
+
+| Operator   | Comparison                | Vectorized? |
+|------------|---------------------------|-------------|
+| `x<y`      | less than                 | Yes         |
+| `x>y`      | greater than              | Yes         |
+| `x <= y`   | less than or equals to    | Yes         |
+| `x >= y`   | greater than or equals to | Yes         |
+| `x != y`   | not equals to             | Yes         |
+| `x == y`   | equals to                 | Yes         |
+| `x %in% y` | contains                  | Yes         |
 
 2.  [**Numeric**]{.underline}
     -   Numeric data are real numbers that contain a decimal. The default numerical type are known as "double", which are floating point values.
@@ -272,6 +302,13 @@ height
 last_name = "Raziq"
 
 last_name
+```
+
+If you use just one equal sign, R will assign a value to an object. However, TWO equal signs would give a different function.
+
+```{r}
+x = 6   # This assigns the value 6 to x
+x == 5  # This checks to see if x equals 5
 ```
 
 ::: callout-note
@@ -508,34 +545,10 @@ rbaf_df <- rbaf_df[-2, ]  # Removes the second row
 ## 5. Operators, Functions and Control Structures
 
 ::: {.callout-tip title="What we'll learn"}
--   Introduction to logical and comparison operators
 -   Introduction to functions
 -   Introduction to control structures (if-else statements, loops).
 -   Example applications of control structures and loops.
 :::
-
-### Logical Operators
-
-| Operator   | Operation    | Vectorized? |
-|------------|--------------|-------------|
-| `x|y`      | or           | Yes         |
-| `x & y`    | and          | Yes         |
-| `!x`       | not          | Yes         |
-| `x || y`   | or           | No          |
-| `x && y`   | and          | No          |
-| `xor(x,y)` | exclusive or | Yes         |
-
-### Comparison Operators
-
-| Operator   | Comparison                | Vectorized? |
-|------------|---------------------------|-------------|
-| `x<y`      | less than                 | Yes         |
-| `x>y`      | greater than              | Yes         |
-| `x <= y`   | less than or equals to    | Yes         |
-| `x >= y`   | greater than or equals to | Yes         |
-| `x != y`   | not equals to             | Yes         |
-| `x == y`   | equals to                 | Yes         |
-| `x %in% y` | contains                  | Yes         |
 
 ### Functions
 
@@ -587,47 +600,75 @@ if (service > 5) {
 
 2.  `for` Loops
 
-Simplest, and most common type of loop in R--given a vector iterate through the elements and evaluate the code block for each.
+A for loop is the simplest, and most common type of loop in R--given a vector iterate through the elements and evaluate the code block for each.
+
+How to Understand For Loops:
+
+1.  **Initialization**: The loop starts by initializing a variable to the first element in the sequence.
+
+2.  **Condition**: The loop continues to run as long as there are elements left in the sequence.
+
+3.  **Increment**: After each iteration, the loop moves to the next element in the sequence.
+
+Example 1: Let's calculate the sum of the first 10 natural numbers using a for loop. This example demonstrates how to use a loop to perform repetitive calculations.
 
 ```{r}
-is_even <- function(x) { 
-  res <- c()
-  
-for(val in x) {
-res <- c(res, val %% 2 == 0)
+# Initialize the sum variable
+sum <- 0
+
+# Loop through numbers from 1 to 10
+for (i in 1:10) {
+  sum <- sum + i  # Add the current number to the sum
 }
-  
-res
-}
-is_even(1:10)
+
+# Print the result
+print(paste("The sum of the first 10 natural numbers is:", sum))
+
 ```
 
+Example 2: Generate the multiplication table for a given number using a for loop.
+
 ```{r}
-is_even(seq(1, 5, 2))
+# Define the number for the multiplication table
+number <- 5
+
+# Loop through numbers 1 to 10 to generate the multiplication table
+for (i in 1:10) {
+    result <- number * i
+    print(paste(number, "x", i, "=", result))
+}
 ```
 
 3.  `while` loops
 
-Repeat until the given condition is not met (i.e. evaluates to `FALSE`)
+A while loop repeatedly executes a block of code as long as a specified condition is TRUE (i.e. evaluates to `FALSE`). This type of loop is useful when you don't know in advance how many times you'll need to repeat the loop.
+
+How to Understand `while` Loops:
+
+1.  **Condition**: Before each iteration, the loop checks if the condition is true.
+
+2.  **Execution**: If the condition is true, the loop executes the block of code.
+
+3.  **Update**: After each iteration, some part of the code updates the condition.
+
+Example 1:
 
 ```{r}
-make_seq <- function(from = 1, to = 1, by = 1) {
-  res <- c(from)
-  cur <- from
-  
-  while(cur + by <= to) {
-    cur = cur + by
-    res = c(res, cur)
-  }
-  
-  res
+# Initialize the countdown variable
+countdown <- 10
+
+# While the countdown is greater than zero
+while (countdown > 0) {
+    print(paste("Countdown:", countdown))  # Print the current countdown value
+    countdown <- countdown - 1  # Decrease the countdown by 1
 }
 
-make_seq(1, 6)
+# Print a message when the countdown is complete
+print("Countdown complete!")
+
 ```
 
-```{r}
-make_seq(1, 6, 2)
+```{p[]}
 ```
 
 [**Exercise**]{.underline}:
@@ -682,47 +723,80 @@ head(titanic)  # Display the first few rows of the data
 -   Creating basic plots (scatter plots, bar plots, histograms, etc.).
 :::
 
-R provides powerful tools for data visualization, allowing you to create various types of plots to explore and present your data. Using the Titanic data set, we can create several common types of plots.
+R provides powerful tools for data visualization, allowing you to create various types of plots to explore and present your data.
 
-1.  Scatter Plots:
+Lets first take a look at the basic plot function.
+
+```{r}
+help(plot)
+
+library(datasets)  # Load built-in datasets
+
+head(iris)         # Show the first six lines of iris data
+summary(iris)      # Summary statistics for iris data
+plot(iris)         # Scatterplot matrix for iris data
+```
+
+Now, lets use the Titanic data set, we can create several common types of plots.
+
+1.  [**Scatter Plots**]{.underline}
 
 Scatter plots are useful for visualizing the relationship between two variables. Lets plot the relationship between age and fare in the Titanic data set.
 
 ```{r}
-plot(titanic$Age, titanic$Fare, 
-     main="Age vs. Fare",
-     xlab="Age", ylab="Fare", pch=19)
+# Scatter plot of age vs. fare
+plot(titanic$Age, titanic$Fare,
+     main = "Scatter Plot of Age vs. Fare",
+     xlab = "Age",
+     ylab = "Fare",
+     col = "green3",
+     pch = 16)
 ```
 
-2.  Bar Plots
-
-Bar plots are useful for comparing. We will visualize the count of passengers in each class.
+2.  [**Bar Plots**]{.underline}
+    -   Bar plots are useful for comparing. We will visualize the count of passengers in each class.
 
 ```{r}
-barplot(table(
-  titanic$Pclass), 
-        main="Count of Passengers by Class", 
-        xlab="Passenger Class", ylab="Count", col="blue")
+# Bar plot of passenger class
+barplot(table(titanic$Pclass),
+        main = "Passenger Class Distribution",
+        xlab = "Class",
+        ylab = "Count",
+        col = "blue4")
+
 ```
 
-3.  Histograms
-
-Histograms are useful for visualizing the distribution of a single numeric variable. Lets plot the the distribution of ages in the Titanic data set.
+3.  [**Histograms**]{.underline}
+    -   Histograms are useful for visualizing the distribution of a single numeric variable. Lets plot the the distribution of ages in the Titanic data set.
 
 ```{r}
+# Histogram of passenger age
 hist(titanic$Age, 
      main="Distribution of Ages on the Titanic", 
-     xlab="Age", col="green", breaks=10)
-
+     xlab="Age",
+     ylab = "Frequency",
+     col="red3",
+     breaks=10)
 ```
 
-4.  Box Plots - Box plots are useful for visualizing the distribution and identifying outliers. Lets visualize the distribution of fares by passenger class.
+4.  Box Plots
+    -   Box plots are useful for visualizing the distribution and identifying outliers. Lets visualize the distribution of agesc by passenger class.
 
 ```{r}
-boxplot(Fare ~ Pclass, data=titanic , 
-        main="Fares by Passenger Class", 
-        xlab="Passenger Class", ylab="Fare", col="orange")
+# Box plot of age by passenger class
+boxplot(Age ~ Pclass,
+        data = titanic,
+        main = "Box Plot of Age by Passenger Class",
+        xlab = "Class",
+        ylab = "Age",
+        col = c("orange", "purple", "cyan"),
+        na.rm = TRUE)  # Remove NA values
+
 ```
+
+## Assignment
+
+## What else can R do?
 
 ## References
 
