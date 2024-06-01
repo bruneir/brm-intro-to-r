@@ -9,11 +9,10 @@ execute:
 ---
 
 ```{r,echo=FALSE}
-install.packages("readr")
 library(rmarkdown)
 library(knitr)
-library(readr)
-titanic <- read.csv("~/Documents/github_local/brm-intro-to-r/data/titanic.csv")
+library(readxl)
+titanic <- read_excel("data/titanic.xlsx")
 ```
 
 ### `https://bruneir.github.io/brm-intro-to-r` {.unlisted}
