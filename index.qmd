@@ -12,7 +12,7 @@ execute:
 library(rmarkdown)
 library(knitr)
 library(readxl)
-titanic <- read_excel("../data/titanic.xlsx")
+titanic <- read_excel("~/Documents/github_local/brm-intro-to-r/data/titanic.xlsx")
 ```
 
 ### `https://bruneir.github.io/brm-intro-to-r` {.unlisted}
