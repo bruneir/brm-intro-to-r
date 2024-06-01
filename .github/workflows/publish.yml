@@ -21,6 +21,7 @@ jobs:
         run: |
           Rscript -e 'if (!requireNamespace("knitr", quietly = TRUE)) install.packages("knitr")'
           Rscript -e 'if (!requireNamespace("rmarkdown", quietly = TRUE)) install.packages("rmarkdown")'
+          Rscript -e 'if (!requireNamespace("readxl", quietly = TRUE)) install.packages("readxl")'
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
