@@ -8,7 +8,7 @@ execute:
   freeze: auto
 ---
 
-```{r,eval=FALSE,echo=FALSE}
+```{r,echo=FALSE}
 library(rmarkdown)
 library(knitr)
 library(readr)
@@ -733,7 +733,7 @@ The writexl package provides functions to write data to Excel files. Install the
 ```{r, eval=FALSE}
 install.packages("writexl")
 library(writexl)
-write_xlsx(titanic_data, "path/to/exported_titanic.xlsx")
+write_xlsx(titanic, "path/to/exported_titanic.xlsx")
 ```
 
 ## 7. Data Visualization
