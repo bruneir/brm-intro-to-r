@@ -744,9 +744,11 @@ R provides powerful tools for data visualization, allowing you to create various
 
 Lets first take a look at the basic plot function.
 
-```{r}
+```{r, eval=FALSE}
 help(plot)
+```
 
+```{r}
 library(datasets)  # Load built-in datasets
 
 head(iris)         # Show the first six lines of iris data
