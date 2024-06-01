@@ -1,5 +1,27 @@
 ---
-title: "About"
+title: "Assignment"
 ---
 
-This is the workshop content on "Introduction to R & RStudio" delivered by Hafeezul Raziq on Saturday, 1st June 2024. Organized by Brunei R User Group.
+This assignment will help you apply the skills you've learned in the workshop, including data import, basic data manipulation, control structures (if-else statements, for loops, while loops), and data visualization.
+
+1.  `if-else` **statement**
+
+-   Write a function `is_even_or_odd` that takes an integer as input and returns "**Even**" if the number is even and "**Odd**" if the number is odd.
+-   Test your function with the numbers 4 and 7.
+
+2.  `for` **or** `while` **loop**
+
+-   Use a `for` loop or `while` loop to calculate the sum of the squares of the numbers from 1 to 10.
+
+-   Print the result.
+
+3.  **Brunei GDP Data Analysis**
+
+-   Import the Brunei GDP dataset from the provided CSV file in "data" folder.
+-   Display the first few rows of the dataset to understand its structure. \[Use `head()`\]
+-   Filter the dataset to include only the years from 2000 onwards. \[Use `subset()`. Use `help()` to understand the function\]
+-   Create a line plot showing GDP over the years. \[Include argument `type = "l"` for line plot\]
+-   Create a bar plot showing GDP for each year.
+-   Export the filtered dataset to a new CSV file.
+
+Solutions can be found in the Github repo named `solution.R`.

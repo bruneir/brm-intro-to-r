@@ -218,7 +218,7 @@ z
 Logical operators are used to combine conditional statements:
 
 | Operator | Operation | Vectorized? |                                                                                   |
-|------------|--------------|------------|-----------------------------------|
+|----------------|----------------|----------------|------------------------|
 | `x|y`    | or        | Yes         | Element-wise Logical OR operator. It returns TRUE if one of the statement is TRUE |
 | `x & y`  | and       | Yes         | Element-wise Logical AND operator. It returns TRUE if both elements are TRUE      |
 | `!x`     | not       | Yes         | Logical NOT - returns FALSE if statement is TRUE                                  |
@@ -665,10 +665,6 @@ while (countdown > 0) {
 
 # Print a message when the countdown is complete
 print("Countdown complete!")
-
-```
-
-```{p[]}
 ```
 
 [**Exercise**]{.underline}:
@@ -697,8 +693,8 @@ R provides various functions for importing data from different file formats, mak
 
 The read.csv() function is used to read CSV files.
 
-```{r}
-titanic <- read.csv("~/Documents/github_local/brm-intro-to-r/data/titanic.csv")
+```{r, eval=FALSE}
+titanic <- read.csv("path/to/titanic.csv")
 ```
 
 ### Importing Excel files
@@ -709,12 +705,33 @@ The readxl package provides functions to read Excel files. Install the package (
 install.packages("readxl")
 library(readxl)
 
-titanic <- read_excel("~/Documents/github_local/brm-intro-to-r/data/titanic.xlsx")
+titanic <- read_excel("path/to/titanic.xlsx")
 ```
 
 ```{r}
 head(titanic)  # Display the first few rows of the data
+```
 
+### How to find the path to the data?
+
+To find the path to load the data, make sure the file the data is in, can be seen on the Files panel in RStudio
+
+### Exporting to CSV files
+
+The write.csv() function is used to write data to CSV files.
+
+```{r, eval=FALSE}
+write.csv(titanic, "path/to/exported_titanic.csv", row.names = FALSE)
+```
+
+### Exporting to Excel files
+
+The writexl package provides functions to write data to Excel files. Install the package (if not already installed) and load it.
+
+```{r, eval=FALSE}
+install.packages("writexl")
+library(writexl)
+write_xlsx(titanic_data, "path/to/exported_titanic.xlsx")
 ```
 
 ## 7. Data Visualization
@@ -749,8 +766,8 @@ plot(titanic$Age, titanic$Fare,
      main = "Scatter Plot of Age vs. Fare",
      xlab = "Age",
      ylab = "Fare",
-     col = "green3",
-     pch = 16)
+     col = "green4",
+     pch = 1) # plotting symbols
 ```
 
 2.  [**Bar Plots**]{.underline}
@@ -763,7 +780,6 @@ barplot(table(titanic$Pclass),
         xlab = "Class",
         ylab = "Count",
         col = "blue4")
-
 ```
 
 3.  [**Histograms**]{.underline}
@@ -791,12 +807,38 @@ boxplot(Age ~ Pclass,
         ylab = "Age",
         col = c("orange", "purple", "cyan"),
         na.rm = TRUE)  # Remove NA values
-
 ```
 
-## Assignment
+### Plotting multiple graphs in 1 plot
+
+We can put multiple graphs in a single plot by setting some graphical parameters with the help of par() function.
+
+```{r}
+# create a new plotting window and set the plotting area into a 1*2 array
+par(mfrow = c(1, 2)) # c(row, column)
+```
 
 ## What else can R do?
+
+Lets take a peek at some of the advanced topics.
+
+1.  **Linear Regression**
+
+    ![](images/linear_regression.png)
+
+2.  **Spatial Analysis**
+
+![](images/mosque_dsitribution_mukim.png)
+
+![](images/mosque_dsitribution_kampong.png)
+
+3.  **Correlation between data**
+
+![](images/p_corr_X.png)
+
+4.  **Quantitative Text Analysis**
+
+![](images/qta.png)
 
 ## References
 
@@ -807,3 +849,5 @@ Techincal Analysis with R (second edition): https://bookdown.org/kochiuyu/techni
 Probability, Statistics, and Data: A fresh approach using R: https://mathstat.slu.edu/\~speegle/\_book/
 
 An Introduction to R: https://intro2r.com/
+
+and many more...

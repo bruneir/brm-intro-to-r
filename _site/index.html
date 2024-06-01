@@ -177,6 +177,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#importing-excel-files" id="toc-importing-excel-files" class="nav-link" data-scroll-target="#importing-excel-files">Importing Excel files</a></li>
   </ul></li>
   <li><a href="#data-visualization" id="toc-data-visualization" class="nav-link" data-scroll-target="#data-visualization">7. Data Visualization</a></li>
+  <li><a href="#assignment" id="toc-assignment" class="nav-link" data-scroll-target="#assignment">Assignment</a></li>
+  <li><a href="#what-else-can-r-do" id="toc-what-else-can-r-do" class="nav-link" data-scroll-target="#what-else-can-r-do">What else can R do?</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
@@ -458,17 +460,17 @@ What we’ll learn
 <p>Logical operators are used to combine conditional statements:</p>
 <table class="table">
 <colgroup>
-<col style="width: 10%">
-<col style="width: 11%">
-<col style="width: 11%">
-<col style="width: 66%">
+<col style="width: 16%">
+<col style="width: 19%">
+<col style="width: 16%">
+<col style="width: 47%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Operator</th>
 <th>Operation</th>
 <th>Vectorized?</th>
-<th>Element-wise Logical AND operator. It returns TRUE if both elements are TRUE</th>
+<th></th>
 </tr>
 </thead>
 <tbody>
@@ -476,37 +478,31 @@ What we’ll learn
 <td><code>x|y</code></td>
 <td>or</td>
 <td>Yes</td>
-<td></td>
+<td>Element-wise Logical OR operator. It returns TRUE if one of the statement is TRUE</td>
 </tr>
 <tr class="even">
 <td><code>x &amp; y</code></td>
 <td>and</td>
 <td>Yes</td>
-<td></td>
+<td>Element-wise Logical AND operator. It returns TRUE if both elements are TRUE</td>
 </tr>
 <tr class="odd">
 <td><code>!x</code></td>
 <td>not</td>
 <td>Yes</td>
-<td></td>
+<td>Logical NOT - returns FALSE if statement is TRUE</td>
 </tr>
 <tr class="even">
 <td><code>x || y</code></td>
 <td>or</td>
 <td>No</td>
-<td></td>
+<td>Logical OR operator. It returns TRUE if one of the statement is TRUE.</td>
 </tr>
 <tr class="odd">
 <td><code>x &amp;&amp; y</code></td>
 <td>and</td>
 <td>No</td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code>xor(x,y)</code></td>
-<td>exclusive or</td>
-<td>Yes</td>
-<td></td>
+<td>Logical AND operator - Returns TRUE if both statements are TRUE</td>
 </tr>
 </tbody>
 </table>
@@ -1121,56 +1117,91 @@ What we’ll learn
 <ol start="2" type="1">
 <li><code>for</code> Loops</li>
 </ol>
-<p>Simplest, and most common type of loop in R–given a vector iterate through the elements and evaluate the code block for each.</p>
+<p>A for loop is the simplest, and most common type of loop in R–given a vector iterate through the elements and evaluate the code block for each.</p>
+<p>How to Understand For Loops:</p>
+<ol type="1">
+<li><p><strong>Initialization</strong>: The loop starts by initializing a variable to the first element in the sequence.</p></li>
+<li><p><strong>Condition</strong>: The loop continues to run as long as there are elements left in the sequence.</p></li>
+<li><p><strong>Increment</strong>: After each iteration, the loop moves to the next element in the sequence.</p></li>
+</ol>
+<p>Example 1: Let’s calculate the sum of the first 10 natural numbers using a for loop. This example demonstrates how to use a loop to perform repetitive calculations.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>is_even <span class="ot">&lt;-</span> <span class="cf">function</span>(x) { </span>
-<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb108-3"><a href="#cb108-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb108-4"><a href="#cb108-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(val <span class="cf">in</span> x) {</span>
-<span id="cb108-5"><a href="#cb108-5" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">c</span>(res, val <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>)</span>
-<span id="cb108-6"><a href="#cb108-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb108-7"><a href="#cb108-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb108-8"><a href="#cb108-8" aria-hidden="true" tabindex="-1"></a>res</span>
-<span id="cb108-9"><a href="#cb108-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb108-10"><a href="#cb108-10" aria-hidden="true" tabindex="-1"></a><span class="fu">is_even</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the sum variable</span></span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>sum <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb108-3"><a href="#cb108-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-4"><a href="#cb108-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through numbers from 1 to 10</span></span>
+<span id="cb108-5"><a href="#cb108-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
+<span id="cb108-6"><a href="#cb108-6" aria-hidden="true" tabindex="-1"></a>  sum <span class="ot">&lt;-</span> sum <span class="sc">+</span> i  <span class="co"># Add the current number to the sum</span></span>
+<span id="cb108-7"><a href="#cb108-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb108-8"><a href="#cb108-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-9"><a href="#cb108-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the result</span></span>
+<span id="cb108-10"><a href="#cb108-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"The sum of the first 10 natural numbers is:"</span>, sum))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE</code></pre>
+<pre><code>[1] "The sum of the first 10 natural numbers is: 55"</code></pre>
 </div>
 </div>
+<p>Example 2: Generate the multiplication table for a given number using a for loop.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is_even</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the number for the multiplication table</span></span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-4"><a href="#cb110-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through numbers 1 to 10 to generate the multiplication table</span></span>
+<span id="cb110-5"><a href="#cb110-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
+<span id="cb110-6"><a href="#cb110-6" aria-hidden="true" tabindex="-1"></a>    result <span class="ot">&lt;-</span> number <span class="sc">*</span> i</span>
+<span id="cb110-7"><a href="#cb110-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(number, <span class="st">"x"</span>, i, <span class="st">"="</span>, result))</span>
+<span id="cb110-8"><a href="#cb110-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] FALSE FALSE FALSE</code></pre>
+<pre><code>[1] "5 x 1 = 5"
+[1] "5 x 2 = 10"
+[1] "5 x 3 = 15"
+[1] "5 x 4 = 20"
+[1] "5 x 5 = 25"
+[1] "5 x 6 = 30"
+[1] "5 x 7 = 35"
+[1] "5 x 8 = 40"
+[1] "5 x 9 = 45"
+[1] "5 x 10 = 50"</code></pre>
 </div>
 </div>
 <ol start="3" type="1">
 <li><code>while</code> loops</li>
 </ol>
-<p>Repeat until the given condition is not met (i.e.&nbsp;evaluates to <code>FALSE</code>)</p>
+<p>A while loop repeatedly executes a block of code as long as a specified condition is TRUE (i.e.&nbsp;evaluates to <code>FALSE</code>). This type of loop is useful when you don’t know in advance how many times you’ll need to repeat the loop.</p>
+<p>How to Understand <code>while</code> Loops:</p>
+<ol type="1">
+<li><p><strong>Condition</strong>: Before each iteration, the loop checks if the condition is true.</p></li>
+<li><p><strong>Execution</strong>: If the condition is true, the loop executes the block of code.</p></li>
+<li><p><strong>Update</strong>: After each iteration, some part of the code updates the condition.</p></li>
+</ol>
+<p>Example 1:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>make_seq <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">1</span>, <span class="at">by =</span> <span class="dv">1</span>) {</span>
-<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">c</span>(from)</span>
-<span id="cb112-3"><a href="#cb112-3" aria-hidden="true" tabindex="-1"></a>  cur <span class="ot">&lt;-</span> from</span>
-<span id="cb112-4"><a href="#cb112-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb112-5"><a href="#cb112-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span>(cur <span class="sc">+</span> by <span class="sc">&lt;=</span> to) {</span>
-<span id="cb112-6"><a href="#cb112-6" aria-hidden="true" tabindex="-1"></a>    cur <span class="ot">=</span> cur <span class="sc">+</span> by</span>
-<span id="cb112-7"><a href="#cb112-7" aria-hidden="true" tabindex="-1"></a>    res <span class="ot">=</span> <span class="fu">c</span>(res, cur)</span>
-<span id="cb112-8"><a href="#cb112-8" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb112-9"><a href="#cb112-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb112-10"><a href="#cb112-10" aria-hidden="true" tabindex="-1"></a>  res</span>
-<span id="cb112-11"><a href="#cb112-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb112-12"><a href="#cb112-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb112-13"><a href="#cb112-13" aria-hidden="true" tabindex="-1"></a><span class="fu">make_seq</span>(<span class="dv">1</span>, <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the countdown variable</span></span>
+<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>countdown <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb112-3"><a href="#cb112-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb112-4"><a href="#cb112-4" aria-hidden="true" tabindex="-1"></a><span class="co"># While the countdown is greater than zero</span></span>
+<span id="cb112-5"><a href="#cb112-5" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (countdown <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb112-6"><a href="#cb112-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Countdown:"</span>, countdown))  <span class="co"># Print the current countdown value</span></span>
+<span id="cb112-7"><a href="#cb112-7" aria-hidden="true" tabindex="-1"></a>    countdown <span class="ot">&lt;-</span> countdown <span class="sc">-</span> <span class="dv">1</span>  <span class="co"># Decrease the countdown by 1</span></span>
+<span id="cb112-8"><a href="#cb112-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 2 3 4 5 6</code></pre>
+<pre><code>[1] "Countdown: 10"
+[1] "Countdown: 9"
+[1] "Countdown: 8"
+[1] "Countdown: 7"
+[1] "Countdown: 6"
+[1] "Countdown: 5"
+[1] "Countdown: 4"
+[1] "Countdown: 3"
+[1] "Countdown: 2"
+[1] "Countdown: 1"</code></pre>
 </div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_seq</span>(<span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print a message when the countdown is complete</span></span>
+<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Countdown complete!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 3 5</code></pre>
+<pre><code>[1] "Countdown complete!"</code></pre>
 </div>
 </div>
+<pre class="{p[]}"><code></code></pre>
 <p><u><strong>Exercise</strong></u>:</p>
 <p>Write a set of conditional(s) that satisfies the following requirements,</p>
 <ul>
@@ -1208,20 +1239,20 @@ What we’ll learn
 <h3 class="anchored" data-anchor-id="importing-csv-files">Importing CSV files</h3>
 <p>The read.csv() function is used to read CSV files.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>titanic <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"~/Documents/github_local/brm-intro-to-r/data/titanic.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a>titanic <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"~/Documents/github_local/brm-intro-to-r/data/titanic.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="importing-excel-files" class="level3">
 <h3 class="anchored" data-anchor-id="importing-excel-files">Importing Excel files</h3>
 <p>The readxl package provides functions to read Excel files. Install the package (if not already installed) and load it.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"readxl"</span>)</span>
-<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb117-3"><a href="#cb117-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-4"><a href="#cb117-4" aria-hidden="true" tabindex="-1"></a>titanic <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"~/Documents/github_local/brm-intro-to-r/data/titanic.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"readxl"</span>)</span>
+<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb118-3"><a href="#cb118-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-4"><a href="#cb118-4" aria-hidden="true" tabindex="-1"></a>titanic <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"~/Documents/github_local/brm-intro-to-r/data/titanic.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(titanic)  <span class="co"># Display the first few rows of the data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(titanic)  <span class="co"># Display the first few rows of the data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  PassengerId Survived Pclass
 1           1        0      3
@@ -1265,15 +1296,71 @@ What we’ll learn
 </ul>
 </div>
 </div>
-<p>R provides powerful tools for data visualization, allowing you to create various types of plots to explore and present your data. Using the Titanic data set, we can create several common types of plots.</p>
+<p>R provides powerful tools for data visualization, allowing you to create various types of plots to explore and present your data.</p>
+<p>Lets first take a look at the basic plot function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(plot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Help on topic 'plot' was found in the following packages:
+
+  Package               Library
+  graphics              /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library
+  base                  /Library/Frameworks/R.framework/Resources/library
+
+
+Using the first match ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(datasets)  <span class="co"># Load built-in datasets</span></span>
+<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb123-3"><a href="#cb123-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)         <span class="co"># Show the first six lines of iris data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(iris)      <span class="co"># Summary statistics for iris data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
+ Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
+ 1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  
+ Median :5.800   Median :3.000   Median :4.350   Median :1.300  
+ Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  
+ 3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  
+ Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  
+       Species  
+ setosa    :50  
+ versicolor:50  
+ virginica :50  
+                
+                
+                </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris)         <span class="co"># Scatterplot matrix for iris data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now, lets use the Titanic data set, we can create several common types of plots.</p>
 <ol type="1">
-<li>Scatter Plots:</li>
+<li><u><strong>Scatter Plots</strong></u></li>
 </ol>
 <p>Scatter plots are useful for visualizing the relationship between two variables. Lets plot the relationship between age and fare in the Titanic data set.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(titanic<span class="sc">$</span>Age, titanic<span class="sc">$</span>Fare, </span>
-<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">"Age vs. Fare"</span>,</span>
-<span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Age"</span>, <span class="at">ylab=</span><span class="st">"Fare"</span>, <span class="at">pch=</span><span class="dv">19</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot of age vs. fare</span></span>
+<span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(titanic<span class="sc">$</span>Age, titanic<span class="sc">$</span>Fare,</span>
+<span id="cb128-3"><a href="#cb128-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Scatter Plot of Age vs. Fare"</span>,</span>
+<span id="cb128-4"><a href="#cb128-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Age"</span>,</span>
+<span id="cb128-5"><a href="#cb128-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Fare"</span>,</span>
+<span id="cb128-6"><a href="#cb128-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"green3"</span>,</span>
+<span id="cb128-7"><a href="#cb128-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">16</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1283,14 +1370,18 @@ What we’ll learn
 </div>
 </div>
 <ol start="2" type="1">
-<li>Bar Plots</li>
+<li><u><strong>Bar Plots</strong></u>
+<ul>
+<li>Bar plots are useful for comparing. We will visualize the count of passengers in each class.</li>
+</ul></li>
 </ol>
-<p>Bar plots are useful for comparing. We will visualize the count of passengers in each class.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(</span>
-<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a>  titanic<span class="sc">$</span>Pclass), </span>
-<span id="cb121-3"><a href="#cb121-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span><span class="st">"Count of Passengers by Class"</span>, </span>
-<span id="cb121-4"><a href="#cb121-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">"Passenger Class"</span>, <span class="at">ylab=</span><span class="st">"Count"</span>, <span class="at">col=</span><span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bar plot of passenger class</span></span>
+<span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(titanic<span class="sc">$</span>Pclass),</span>
+<span id="cb129-3"><a href="#cb129-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Passenger Class Distribution"</span>,</span>
+<span id="cb129-4"><a href="#cb129-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Class"</span>,</span>
+<span id="cb129-5"><a href="#cb129-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Count"</span>,</span>
+<span id="cb129-6"><a href="#cb129-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">"blue4"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1300,13 +1391,19 @@ What we’ll learn
 </div>
 </div>
 <ol start="3" type="1">
-<li>Histograms</li>
+<li><u><strong>Histograms</strong></u>
+<ul>
+<li>Histograms are useful for visualizing the distribution of a single numeric variable. Lets plot the the distribution of ages in the Titanic data set.</li>
+</ul></li>
 </ol>
-<p>Histograms are useful for visualizing the distribution of a single numeric variable. Lets plot the the distribution of ages in the Titanic data set.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(titanic<span class="sc">$</span>Age, </span>
-<span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">"Distribution of Ages on the Titanic"</span>, </span>
-<span id="cb122-3"><a href="#cb122-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Age"</span>, <span class="at">col=</span><span class="st">"green"</span>, <span class="at">breaks=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram of passenger age</span></span>
+<span id="cb130-2"><a href="#cb130-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(titanic<span class="sc">$</span>Age, </span>
+<span id="cb130-3"><a href="#cb130-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">"Distribution of Ages on the Titanic"</span>, </span>
+<span id="cb130-4"><a href="#cb130-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Age"</span>,</span>
+<span id="cb130-5"><a href="#cb130-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Frequency"</span>,</span>
+<span id="cb130-6"><a href="#cb130-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="st">"red3"</span>,</span>
+<span id="cb130-7"><a href="#cb130-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1316,12 +1413,20 @@ What we’ll learn
 </div>
 </div>
 <ol start="4" type="1">
-<li>Box Plots - Box plots are useful for visualizing the distribution and identifying outliers. Lets visualize the distribution of fares by passenger class.</li>
+<li>Box Plots
+<ul>
+<li>Box plots are useful for visualizing the distribution and identifying outliers. Lets visualize the distribution of agesc by passenger class.</li>
+</ul></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Fare <span class="sc">~</span> Pclass, <span class="at">data=</span>titanic , </span>
-<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span><span class="st">"Fares by Passenger Class"</span>, </span>
-<span id="cb123-3"><a href="#cb123-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">"Passenger Class"</span>, <span class="at">ylab=</span><span class="st">"Fare"</span>, <span class="at">col=</span><span class="st">"orange"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Box plot of age by passenger class</span></span>
+<span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Age <span class="sc">~</span> Pclass,</span>
+<span id="cb131-3"><a href="#cb131-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> titanic,</span>
+<span id="cb131-4"><a href="#cb131-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Box Plot of Age by Passenger Class"</span>,</span>
+<span id="cb131-5"><a href="#cb131-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Class"</span>,</span>
+<span id="cb131-6"><a href="#cb131-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Age"</span>,</span>
+<span id="cb131-7"><a href="#cb131-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"orange"</span>, <span class="st">"purple"</span>, <span class="st">"cyan"</span>),</span>
+<span id="cb131-8"><a href="#cb131-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">na.rm =</span> <span class="cn">TRUE</span>)  <span class="co"># Remove NA values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1330,6 +1435,12 @@ What we’ll learn
 </div>
 </div>
 </div>
+</section>
+<section id="assignment" class="level2">
+<h2 class="anchored" data-anchor-id="assignment">Assignment</h2>
+</section>
+<section id="what-else-can-r-do" class="level2">
+<h2 class="anchored" data-anchor-id="what-else-can-r-do">What else can R do?</h2>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
