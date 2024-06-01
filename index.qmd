@@ -9,6 +9,7 @@ execute:
 ---
 
 ```{r,echo=FALSE}
+install.packages("readr")
 library(rmarkdown)
 library(knitr)
 library(readr)
