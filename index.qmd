@@ -8,7 +8,7 @@ execute:
   freeze: auto
 ---
 
-```{r,echo=FALSE}
+```{r,eval=TRUE, echo=FALSE}
 library(rmarkdown)
 library(knitr)
 library(readxl)
