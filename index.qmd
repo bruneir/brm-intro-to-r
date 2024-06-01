@@ -11,6 +11,8 @@ execute:
 ```{r,eval=FALSE,echo=FALSE}
 library(rmarkdown)
 library(knitr)
+library(readr)
+titanic <- read.csv("~/Documents/github_local/brm-intro-to-r/data/titanic.csv")
 ```
 
 ### `https://bruneir.github.io/brm-intro-to-r` {.unlisted}
