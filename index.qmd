@@ -708,7 +708,7 @@ library(readxl)
 titanic <- read_excel("path/to/titanic.xlsx")
 ```
 
-```{r}
+```{r, eval=FALSE}
 head(titanic)  # Display the first few rows of the data
 ```
 
